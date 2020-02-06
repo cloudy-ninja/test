@@ -1,4 +1,5 @@
 import {StyleSheet} from 'react-native';
+import {colors} from '../../constants/theme';
 
 const styles = StyleSheet.create({
   container: {
@@ -11,7 +12,7 @@ const styles = StyleSheet.create({
   separator: {
     width: '100%',
     height: 1,
-    backgroundColor: 'rgba(17, 17, 17, 0.5)',
+    backgroundColor: colors.lightGray,
     opacity: 0.5,
   },
 });

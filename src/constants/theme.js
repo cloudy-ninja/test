@@ -2,13 +2,15 @@ const colors = {
   black: '#000000',
   white: '#ffffff',
   blue: '#0000ff',
+  skyBlue: '#1e90ff',
+  lightGray: 'rgba(17, 17, 17, 0.5)',
 };
 
 const sizes = {
   // global sizes
   base: 16,
   font: 14,
-  radius: 10,
+  radius: 14,
   padding: 15,
 
   // font sizes

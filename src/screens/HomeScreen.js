@@ -1,7 +1,8 @@
 import React, {Component} from 'react';
-import {Text, View, StyleSheet, TouchableOpacity} from 'react-native';
+import {StyleSheet} from 'react-native';
 import Modal from 'react-native-modal';
 import ImagePicker from 'react-native-image-picker';
+import {colors, sizes} from '../constants/theme';
 import {Container, Wrapper, Separator} from '../components/common';
 import {ViewImage, SelectButton, PopupButton} from '../components/home';
 
@@ -11,7 +12,7 @@ export default class HomeScreen extends Component {
 
     this.state = {
       selectedImage: null,
-      selectedMedia: null,
+      selectedVideo: null,
       isModalVisible: false,
     };
   }
@@ -90,8 +91,8 @@ export default class HomeScreen extends Component {
             marginBottom={50}>
             <Wrapper
               width={'85%'}
-              borderRadius={14}
-              backgroundColor={'#ffffff'}
+              borderRadius={sizes.radius}
+              backgroundColor={colors.white}
               overflow={'hidden'}>
               <PopupButton
                 buttonText={'Import from Camera Roll'}

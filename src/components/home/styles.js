@@ -1,5 +1,5 @@
 import {StyleSheet} from 'react-native';
-import {colors} from '../../constants/theme';
+import {colors, sizes} from '../../constants/theme';
 
 const styles = StyleSheet.create({
   imageWrapper: {
@@ -16,7 +16,7 @@ const styles = StyleSheet.create({
     bottom: 50,
   },
   selectButtonText: {
-    fontSize: 20,
+    fontSize: sizes.h2,
     color: 'white',
   },
   popupButton: {
@@ -24,11 +24,11 @@ const styles = StyleSheet.create({
     height: 50,
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: '#ffffff',
+    backgroundColor: colors.white,
   },
   popupButtonText: {
-    fontSize: 18,
-    color: colors.blue,
+    fontSize: sizes.h3,
+    color: colors.skyBlue,
   },
 });
 
