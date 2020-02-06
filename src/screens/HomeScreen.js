@@ -83,26 +83,21 @@ export default class HomeScreen extends Component {
         <SelectButton onPress={this.onShowPopup} buttonTitle={'Show popup'} />
 
         <Modal
+          onBackdropPress={this.disablePopup}
           backdropColor={'transparent'}
           isVisible={isModalVisible}
           style={styles.modalStyle}>
           <Wrapper
-            size={1}
-            primary={'flex-end'}
-            secondary={'center'}
-            marginBottom={50}>
-            <Wrapper
-              width={'85%'}
-              borderRadius={sizes.radius}
-              backgroundColor={colors.white}
-              overflow={'hidden'}>
-              <PopupButton
-                buttonText={'Import from Camera Roll'}
-                onPress={this.onSelectImageFromLocal}
-              />
-              <Separator />
-              <PopupButton buttonText={'Import from Cloudy Library'} />
-            </Wrapper>
+            width={'85%'}
+            borderRadius={sizes.radius}
+            backgroundColor={colors.white}
+            overflow={'hidden'}>
+            <PopupButton
+              buttonText={'Import from Camera Roll'}
+              onPress={this.onSelectImageFromLocal}
+            />
+            <Separator />
+            <PopupButton buttonText={'Import from Cloudy Library'} />
           </Wrapper>
         </Modal>
       </Container>
@@ -113,5 +108,9 @@ export default class HomeScreen extends Component {
 const styles = StyleSheet.create({
   modalStyle: {
     margin: 0,
+    flex: 1,
+    justifyContent: 'flex-end',
+    alignItems: 'center',
+    paddingBottom: 50,
   },
 });
