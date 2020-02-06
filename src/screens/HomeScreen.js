@@ -33,9 +33,11 @@ export default class HomeScreen extends Component {
     // Open Image Library:
     ImagePicker.launchImageLibrary(options, response => {
       const imageSource = {uri: response.uri};
-      this.setState({
-        selectedImage: imageSource,
-      });
+      if (!response.didCancel) {
+        this.setState({
+          selectedImage: imageSource,
+        });
+      }
     });
   };
 
