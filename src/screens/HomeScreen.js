@@ -28,9 +28,7 @@ export default class HomeScreen extends Component {
     ImagePicker.openPicker({
       mediaType: 'any',
     }).then(media => {
-      console.log('media===>>>', media);
       const mediaType = media.mime.split('/')[0];
-      console.log('mediaType===>>>', mediaType);
 
       if (mediaType === 'image') {
         this.setState({
@@ -95,17 +93,10 @@ export default class HomeScreen extends Component {
           />
         ) : (
           <Video
-            source={
-              selectedVideo || {
-                uri:
-                  'http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4',
-              }
-            } // Can be a URL or a local file.
+            source={selectedVideo}
             ref={ref => {
               this.player = ref;
             }} // Store reference
-            onBuffer={this.onBuffer} // Callback when remote video is buffering
-            onError={this.videoError} // Callback when video cannot be loaded
             style={styles.backgroundVideo}
           />
         )}
