@@ -1,7 +1,8 @@
 import React, {Component} from 'react';
 import {StyleSheet} from 'react-native';
+import Video from 'react-native-video';
 import Modal from 'react-native-modal';
-import ImagePicker from 'react-native-image-picker';
+import ImagePicker from 'react-native-image-crop-picker';
 import {colors, sizes} from '../constants/theme';
 import {Container, Wrapper, Separator} from '../components/common';
 import {ViewImage, SelectButton, PopupButton} from '../components/home';
@@ -13,6 +14,7 @@ export default class HomeScreen extends Component {
     this.state = {
       selectedImage: null,
       selectedVideo: null,
+      selectedMediaType: 'image',
       isModalVisible: false,
     };
   }
@@ -22,20 +24,23 @@ export default class HomeScreen extends Component {
    *
    */
   pickImage = () => {
-    // Image select options
-    const options = {
-      storageOptions: {
-        skipBackup: true,
-        path: 'images',
-      },
-    };
-
     // Open Image Library:
-    ImagePicker.launchImageLibrary(options, response => {
-      const imageSource = {uri: response.uri};
-      if (!response.didCancel) {
+    ImagePicker.openPicker({
+      mediaType: 'any',
+    }).then(media => {
+      console.log('media===>>>', media);
+      const mediaType = media.mime.split('/')[0];
+      console.log('mediaType===>>>', mediaType);
+
+      if (mediaType === 'image') {
         this.setState({
-          selectedImage: imageSource,
+          selectedImage: {uri: media.path},
+          selectedMediaType: mediaType,
+        });
+      } else {
+        this.setState({
+          selectedVideo: {uri: media.path},
+          selectedMediaType: mediaType,
         });
       }
     });
@@ -73,13 +78,37 @@ export default class HomeScreen extends Component {
   };
 
   render() {
-    const {selectedImage, isModalVisible} = this.state;
+    const {
+      selectedMediaType,
+      selectedImage,
+      selectedVideo,
+      isModalVisible,
+    } = this.state;
 
     return (
       <Container>
-        <ViewImage
-          source={selectedImage || {uri: 'https://source.unsplash.com/random'}}
-        />
+        {selectedMediaType === 'image' ? (
+          <ViewImage
+            source={
+              selectedImage || {uri: 'https://source.unsplash.com/random'}
+            }
+          />
+        ) : (
+          <Video
+            source={
+              selectedVideo || {
+                uri:
+                  'http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4',
+              }
+            } // Can be a URL or a local file.
+            ref={ref => {
+              this.player = ref;
+            }} // Store reference
+            onBuffer={this.onBuffer} // Callback when remote video is buffering
+            onError={this.videoError} // Callback when video cannot be loaded
+            style={styles.backgroundVideo}
+          />
+        )}
         <SelectButton onPress={this.onShowPopup} buttonTitle={'Show popup'} />
 
         <Modal
@@ -112,5 +141,12 @@ const styles = StyleSheet.create({
     justifyContent: 'flex-end',
     alignItems: 'center',
     paddingBottom: 50,
+  },
+  backgroundVideo: {
+    position: 'absolute',
+    top: 0,
+    left: 0,
+    bottom: 0,
+    right: 0,
   },
 });

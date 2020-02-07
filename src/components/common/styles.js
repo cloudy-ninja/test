@@ -8,6 +8,7 @@ const styles = StyleSheet.create({
     height: '100%',
     flexDirection: 'column',
     alignItems: 'center',
+    backgroundColor: colors.black,
   },
   separator: {
     width: '100%',

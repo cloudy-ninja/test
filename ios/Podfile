@@ -34,6 +34,10 @@ target 'testproject' do
   pod 'glog', :podspec => '../node_modules/react-native/third-party-podspecs/glog.podspec'
   pod 'Folly', :podspec => '../node_modules/react-native/third-party-podspecs/Folly.podspec'
 
+  pod 'react-native-video', :path => '../node_modules/react-native-video'
+
+  pod 'RNImageCropPicker', :path => '../node_modules/react-native-image-crop-picker'
+
   target 'testprojectTests' do
     inherit! :search_paths
     # Pods for testing
