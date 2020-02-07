@@ -27,21 +27,23 @@ export default class HomeScreen extends Component {
     // Open Image Library:
     ImagePicker.openPicker({
       mediaType: 'any',
-    }).then(media => {
-      const mediaType = media.mime.split('/')[0];
+    })
+      .then(media => {
+        const mediaType = media.mime.split('/')[0];
 
-      if (mediaType === 'image') {
-        this.setState({
-          selectedImage: {uri: media.path},
-          selectedMediaType: mediaType,
-        });
-      } else {
-        this.setState({
-          selectedVideo: {uri: media.path},
-          selectedMediaType: mediaType,
-        });
-      }
-    });
+        if (mediaType === 'image') {
+          this.setState({
+            selectedImage: {uri: media.path},
+            selectedMediaType: mediaType,
+          });
+        } else {
+          this.setState({
+            selectedVideo: {uri: media.path},
+            selectedMediaType: mediaType,
+          });
+        }
+      })
+      .catch(error => {});
   };
 
   /**
